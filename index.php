@@ -3,24 +3,28 @@ declare(strict_types=1);
 session_start();
 require "class/PostLoader.php";
 require "class/Post.php";
-//var_dump($_POST);
+require "PostPusher.php";
+
+$postLoader = new PostLoader();
 
 
 $post = new Post();
-if(isset($_POST["send"])){$test = $post->classi();}
+if(isset($_POST["send"])){$inputdata = $post->inputdata();}
 
-//var_dump($test);
 
-$postload = new PostLoader();
-$array =  $postload ->getArrayobject();
-$ispushed = $array[]=$test;
-var_dump($ispushed);
-////var_dump($stdclass);
-////echo $postload->loadComments()
-//
-//if(!isset($_SESSION["array"])){$_SESSION["array"]=$stdclass;};
-//var_dump($_SESSION);
 
+$newAndDb =  $postLoader ->getArrayobject();
+ $newAndDb[]=$inputdata;
+
+
+
+if(isset($_POST["send"]) && !empty($_POST["title"])&& !empty($_POST["content"])&& !empty($_POST["author"])){
+    $postPusher = new PostPusher();
+    $postPusher->setPusher($newAndDb);
+    $postPusher->addToDb();
+}else{
+    unset($_POST);
+}
 ?>
 
 <!DOCTYPE HTML>
@@ -36,19 +40,29 @@ var_dump($ispushed);
 <body>
 <form method="post" id="commentForm" action="">
     <label for="title">Title</label>
-    <input type="text" id="title" name="title" value="<?php  echo $_POST['title']?>">
+    <input type="text" id="title" name="title" value="">
     <label for="content">Content</label>
-    <input type="text" id="content" name="content" value="<?php  echo $_POST['content'] ?>">
+    <input type="text" id="content" name="content" value="">
     <label for="author">author</label>
-    <input type="text" id="author" name="author" value="<?php echo $_POST['author'] ?>">
-    <input type="" id="date" name="date" READONLY value=" date "> <?php/* echo $test->date() */?>
+    <input type="text" id="author" name="author" value="">
+    <input type="" id="date" name="date" READONLY value=" <?php echo $post->currentDate() ?> ">
     <input type="submit" id="send" name="send">
 
 </form>
 <div>
-<p><?php  ?></p>
-<p> hello</p>
-<p>test</p>
+    <?php //for($i=count($array)-1; $i>=count($array)-21 ;$i--){
+     for($i=1; $i<=min(20,count($newAndDb)) ; $i++){
+         $displayposts=$newAndDb[count($newAndDb)-$i];
+
+            echo
+
+                '<h2>' . htmlspecialchars($displayposts->title) . '</h2> <p>' . htmlspecialchars($displayposts->content) . '</p> <p>' . htmlspecialchars($displayposts->author) .'</p> <i> '  .htmlspecialchars($displayposts->date) . ' </i></p>';
+
+
+    }      ?>
+
+
+
 
 
 

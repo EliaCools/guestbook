@@ -1,41 +1,36 @@
 <?php
 declare(strict_types=1);
-//method could be better
-//property or method.
 class PostLoader
 {
-    private const  FILE = "data.txt";
-    private stdClass $comment;
+    private const  FILE = "data.json";
     private array $arrayobjects;
-    private Post $post;
-    public function loadComments(): string
+
+
+
+    private function loadComments(): string
     {
-        return file_get_contents("data.txt");
+        return file_get_contents(self::FILE);
 
     }
 
-    public function convertComments() :stdClass
+    private function convertComments() :array
     {
-        return json_decode($this->loadComments());
-    }
-
-    public function push() :stdClass{
-       return $this->arrayobjects[] = $this->convertComments();
+      return  $this -> arrayobjects = json_decode($this->loadComments());
     }
 
     public function getArrayobject() : array{
         return $this->arrayobjects;
     }
 
-    //public function getTitle() : stdClass{
-    // return $this->comment;
-    //}
     public function __construct()
     {
+        if($this->loadComments()!=null){
+            $this ->convertComments();
+        }else{
+            $this->arrayobjects=[];
+        }
 
-        //return $this ->loadComments();
-        //$this -> comment = new stdClass();
-        $this ->push();
+
     }
 
 
