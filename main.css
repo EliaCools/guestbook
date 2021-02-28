@@ -1,0 +1,82 @@
+body{
+    background-color:dimgray;
+    background-size:cover;
+    margin:0 auto;
+}
+header{
+    margin:0;
+    padding: 0;
+    background-color:ghostwhite;
+    min-height:50px;
+    position: fixed;
+    z-index: 111;
+    width:100%;
+
+    border-bottom: skyblue solid 1px;
+}
+
+p,h1,h2{
+    font-family: 'Montserrat', sans-serif;
+}
+
+#headerh1{
+    font-family: 'Shadows Into Light', cursive;
+    position: relative;
+    margin:0 0 0 10px;
+    padding:0;
+}
+
+#main-page {
+    padding-top: 70px;
+    max-width: 75%;
+    margin:0  auto;
+    background-color:whitesmoke;
+}
+.main-titles{
+    margin:30px;
+}
+
+hr{
+    margin:30px;
+    border-top: 1px solid skyblue;
+}
+#inputdiv{
+    margin:30px 30px 0 30px;
+}
+
+#send{
+    border-radius:3px;
+    border:1px solid grey;
+    width:100px;
+    height:40px;
+}
+
+input{
+    margin:10px 0 10px 0;
+}
+
+#content{
+    height:150px;
+    width:700px;
+
+}
+
+#contentLabel {
+    vertical-align: top;
+}
+
+label{
+    width: 100px;
+    display: inline-block;
+}
+.posts{
+    background-color:white;
+    margin: 0 20px 0 20px;
+    box-sizing: border-box;
+}
+.posts-inner{
+    margin:20px;
+}
+#guestbook-posts{
+    padding-bottom: 30px;
+}
